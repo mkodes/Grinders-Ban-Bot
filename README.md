@@ -11,10 +11,10 @@ This bot allows members of a Discord server to vote on banning a member. A vote 
 
 ## Setup
 1. **Clone the repository**
-   git clone https://github.com/yourgithubusername/discord-voteban-bot.git
+   `git clone https://github.com/yourgithubusername/discord-voteban-bot.git`
    
 2. **Install dependencies**
-pip install -r requirements.txt
+`pip install -r requirements.txt`
 
 3. **Configuration**
 - Replace `your-bot-token` with your Discord bot token.
