@@ -2,6 +2,10 @@ import discord
 from discord.ext import commands
 import asyncio
 import logging
+import os
+from dotenv import load_dotenv, dotenv_values
+
+load_dotenv() 
 
 # Logging configuration
 logging.basicConfig(level=logging.INFO, format='%(asctime)s:%(levelname)s:%(name)s: %(message)s')
@@ -17,10 +21,10 @@ intents.message_content = True
 bot = commands.Bot(command_prefix='/', intents=intents)
 
 # Slash command to vote for banning a member
-@bot.slash_command(guild_ids=[YOUR_GUILD_ID_HERE], description="Vote to ban a member")
+@bot.slash_command(guild_ids=[os.getenv("GUILD_ID")], description="Vote to ban a member")
 async def voteban(ctx, member: discord.Member, reason: str):
     # Check if the author has the 'Legacy Members' role
-    member_role_id = YOUR_MEMBER_ROLE_ID_HERE  # Make sure this is the correct role ID
+    member_role_id = os.getenv("MEMBER_ROLE_ID")  # Make sure this is the correct role ID
     if member_role_id not in [role.id for role in ctx.author.roles]:
         await ctx.respond("You do not have the required role to use this command.")
         return
@@ -58,4 +62,4 @@ async def voteban(ctx, member: discord.Member, reason: str):
         await ctx.send_followup(f"{member.display_name} will not be banned. Voting results: {count_up} for, {count_down} against.")
 
 # Start the bot
-bot.run('your-bot-token')
+bot.run(os.getenv("DISCORD_TOKEN"))
